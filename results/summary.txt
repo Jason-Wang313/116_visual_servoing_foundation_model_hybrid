@@ -1,8 +1,16 @@
-observed_only_wam nominal success=0.588 tail_risk=0.412
-observed_only_wam hidden_mode_shift success=0.163 tail_risk=0.838
-augmentation_as_data_wam nominal success=0.625 tail_risk=0.375
-augmentation_as_data_wam hidden_mode_shift success=0.292 tail_risk=0.708
-scalar_uncertainty_wam nominal success=0.703 tail_risk=0.297
-scalar_uncertainty_wam hidden_mode_shift success=0.333 tail_risk=0.667
-proposed_branch_mechanism nominal success=0.787 tail_risk=0.213
-proposed_branch_mechanism hidden_mode_shift success=0.568 tail_risk=0.432
+Submission-hardening experiment for paper 116 visual_servoing_foundation_model_hybrid
+Seven seeds, 600 episodes per seed, strong baselines, ablations, stress sweep, and negative cases.
+observed_only_behavior_clone hidden_mode_shift mean_success=0.4136 ci95=0.0219 tail=0.5864
+observed_only_behavior_clone combined_stress mean_success=0.3169 ci95=0.0155 tail=0.6831
+data_augmentation_wam hidden_mode_shift mean_success=0.4883 ci95=0.0140 tail=0.5117
+data_augmentation_wam combined_stress mean_success=0.4245 ci95=0.0103 tail=0.5755
+scalar_uncertainty_planner hidden_mode_shift mean_success=0.5519 ci95=0.0206 tail=0.4481
+scalar_uncertainty_planner combined_stress mean_success=0.4988 ci95=0.0235 tail=0.5012
+ensemble_disagreement_planner hidden_mode_shift mean_success=0.5843 ci95=0.0112 tail=0.4157
+ensemble_disagreement_planner combined_stress mean_success=0.5269 ci95=0.0156 tail=0.4731
+conformal_risk_filter hidden_mode_shift mean_success=0.6019 ci95=0.0129 tail=0.3981
+conformal_risk_filter combined_stress mean_success=0.5595 ci95=0.0143 tail=0.4405
+proposed_branch_mechanism hidden_mode_shift mean_success=0.6824 ci95=0.0179 tail=0.3176
+proposed_branch_mechanism combined_stress mean_success=0.6533 ci95=0.0166 tail=0.3467
+oracle_branch_upper_bound hidden_mode_shift mean_success=0.7593 ci95=0.0185 tail=0.2407
+oracle_branch_upper_bound combined_stress mean_success=0.7410 ci95=0.0156 tail=0.2590
