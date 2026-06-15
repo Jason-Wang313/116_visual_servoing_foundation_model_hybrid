@@ -251,18 +251,39 @@ def main():
     ab_metrics = aggregate(ab_rows, ["ablation"])
 
     stress_rows = []
-    split = combined_split.copy()
-    regime = next(r for r in REGIMES if r["name"] == "compound_visual_geometry_shift").copy()
     for level in np.linspace(0.0, 1.0, 6):
+        split = combined_split.copy()
         split["severity"] = 0.08 + 0.70 * float(level)
         split["geometry_gap"] = 0.04 + 0.50 * float(level)
-        regime["severity"] = 0.05 + 0.62 * float(level)
-        regime["alias"] = 0.02 + 0.56 * float(level)
         for method in [m for m in methods if m["name"] in {"foundation_policy_only", "ensemble_risk_gate", "proposed_servo_foundation_arbiter", "oracle_arbiter"}]:
             for seed in SEEDS:
-                vals = [simulate(method, split, regime, task, seed)["success_rate"] for task in TASKS]
-                stress_rows.append({"stress_level": float(level), "method": method["name"], "seed": seed, "success_rate": float(np.mean(vals))})
-    stress_summary = aggregate(stress_rows, ["stress_level", "method"], metrics=["success_rate"])
+                for task in TASKS:
+                    for regime in REGIMES:
+                        stressed_regime = regime.copy()
+                        stressed_regime["severity"] = max(regime["severity"], 0.05 + 0.62 * float(level))
+                        stressed_regime["alias"] = max(regime["alias"], 0.02 + 0.56 * float(level))
+                        row = simulate(method, split, stressed_regime, task, seed)
+                        row["stress_level"] = float(level)
+                        stress_rows.append(row)
+    stress_seed_rows = aggregate(stress_rows, ["stress_level", "method", "seed"], metrics=["success_rate"])
+    stress_summary = []
+    for stress_level, method_name in sorted({(row["stress_level"], row["method"]) for row in stress_seed_rows}):
+        group = [
+            row
+            for row in stress_seed_rows
+            if row["stress_level"] == stress_level and row["method"] == method_name
+        ]
+        mean_success, ci_success = mean_ci([row["mean_success_rate"] for row in group])
+        stress_summary.append(
+            {
+                "stress_level": stress_level,
+                "method": method_name,
+                "mean_success_rate": mean_success,
+                "ci95_success_rate": ci_success,
+                "groups": len(group),
+                "episodes_per_group": EPISODES_PER_GROUP,
+            }
+        )
 
     for path, data in [
         ("seed_task_regime_metrics.csv", rows),
@@ -281,6 +302,11 @@ def main():
         {"case": "semantic_policy_correct_but_pixel_error_large", "expected_behavior": "servo override", "observed_failure_mode": "foundation-only overshoots target", "lesson": "semantic correctness is not local stability"},
         {"case": "servo_jacobian_degenerate", "expected_behavior": "foundation action or guarded slowdown", "observed_failure_mode": "IBVS-only oscillates", "lesson": "classical servo should not always override"},
         {"case": "occlusion_plus_depth_scale_error", "expected_behavior": "calibrated arbitration", "observed_failure_mode": "uncertainty gate over-rejects and slows task", "lesson": "hybrid must model cost and stability together"},
+        {"case": "hidden_jacobian_singularity_under_crop", "expected_behavior": "detect unstable local geometry before override", "observed_failure_mode": "arbiter accepts a servo step near a singular interaction matrix", "lesson": "servo confidence needs geometry-aware stability margins"},
+        {"case": "field_of_view_escape_after_large_foundation_step", "expected_behavior": "prefer bounded servo correction", "observed_failure_mode": "learned action moves the target outside the camera field of view", "lesson": "semantic action quality can still break visual feedback"},
+        {"case": "latency_induced_override_harm", "expected_behavior": "account for switching and control delay", "observed_failure_mode": "late override destabilizes an otherwise recoverable foundation action", "lesson": "hybrid arbitration needs timing as well as risk"},
+        {"case": "calibration_confidence_misleading_after_relighting", "expected_behavior": "downweight learned confidence under visual shift", "observed_failure_mode": "calibrated gate trusts a visually aliased learned action", "lesson": "confidence calibration must be audited under perception shift"},
+        {"case": "oracle_gap_under_compound_visual_geometry_shift", "expected_behavior": "approach oracle arbitration under maximum stress", "observed_failure_mode": "oracle remains substantially better at high aliasing and Jacobian mismatch", "lesson": "local arbiter is useful but not saturated"},
     ])
 
     combined = {r["method"]: r for r in metrics if r["split"] == "combined_stress"}

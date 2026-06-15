@@ -2,3 +2,8 @@ case,expected_behavior,observed_failure_mode,lesson
 semantic_policy_correct_but_pixel_error_large,servo override,foundation-only overshoots target,semantic correctness is not local stability
 servo_jacobian_degenerate,foundation action or guarded slowdown,IBVS-only oscillates,classical servo should not always override
 occlusion_plus_depth_scale_error,calibrated arbitration,uncertainty gate over-rejects and slows task,hybrid must model cost and stability together
+hidden_jacobian_singularity_under_crop,detect unstable local geometry before override,arbiter accepts a servo step near a singular interaction matrix,servo confidence needs geometry-aware stability margins
+field_of_view_escape_after_large_foundation_step,prefer bounded servo correction,learned action moves the target outside the camera field of view,semantic action quality can still break visual feedback
+latency_induced_override_harm,account for switching and control delay,late override destabilizes an otherwise recoverable foundation action,hybrid arbitration needs timing as well as risk
+calibration_confidence_misleading_after_relighting,downweight learned confidence under visual shift,calibrated gate trusts a visually aliased learned action,confidence calibration must be audited under perception shift
+oracle_gap_under_compound_visual_geometry_shift,approach oracle arbitration under maximum stress,oracle remains substantially better at high aliasing and Jacobian mismatch,local arbiter is useful but not saturated
