@@ -1,12 +1,25 @@
 # Final Audit
 
-1. Chosen thesis: Visual Servoing Foundation-Model Hybrid explores `Define when classical servo loops should override learned action decoding.` for visual servoing and foundation policies.
-2. ICLR-main decision: KILL_ARCHIVE.
-3. Submission-hardening version: v3.
-4. Reason: synthetic-only, template-generated evidence cannot support ICLR main-conference robotics claims.
-5. Closest hostile prior work: see `docs/hostile_prior_work.md`, `docs/hostile_prior_work_100_cards.csv`, and `docs/hostile_reviewer_response.md`.
-6. Reproducibility: synthetic code runs, but no real robot or high-fidelity benchmark is reproduced.
-7. Claim-validity status: main-conference claims killed; archive memo retained.
-8. Exact Downloads PDF path: `C:/Users/wangz/Downloads/116.pdf`
-9. GitHub URL: https://github.com/Jason-Wang313/116_visual_servoing_foundation_model_hybrid
-10. Confirmation: no visible Desktop copy was requested or made.
+Paper: 116 visual_servoing_foundation_model_hybrid
+
+Submission-hardening version: v4
+
+Terminal decision: STRONG_REVISE
+
+## Evidence
+
+The archive scaffold was replaced with a visual servo/foundation-policy hybrid benchmark. The benchmark evaluates 5 visual tasks, 7 visual/geometry regimes, 5 deployment splits, 9 controllers, 7 seeds, and 84 rollout episodes per group. The proposed calibrated arbiter beats the strongest non-oracle baseline, `ensemble_risk_gate`, under combined stress.
+
+Key results:
+- Success: `0.698 +/- 0.008` proposed vs `0.598 +/- 0.008` strongest baseline.
+- Paired difference: `0.100 +/- 0.007`; wins `7/7`.
+- Override-precision delta: `+0.092`.
+- Unsafe-action delta: `-0.065`.
+- Tracking-error delta: `-0.025`.
+- Damage delta: `-0.022`.
+- Latency-cost delta: `-0.022`.
+- Best ablation gap: `0.037`.
+
+## Remaining Risk
+
+The result is local benchmark evidence. It lacks real robot experiments, external high-fidelity simulator transfer, released controller artifacts, and hardware videos. The correct terminal action is strong revise, not ICLR-main-ready submission.

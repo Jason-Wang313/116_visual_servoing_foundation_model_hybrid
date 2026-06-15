@@ -1,6 +1,7 @@
 # Claims
 
-- Mechanism claim: Visual servoing foundation model hybrid keeps action-critical alternatives explicit until a physical observation collapses them.
-- Evidence claim: the included synthetic experiment tests hidden physical-mode perturbations and compares observed-only, augmented-data, uncertainty, and proposed variants.
-- Scope claim: results support mechanism plausibility, not real-robot deployment.
-- Unsupported claim explicitly avoided: no claim of SOTA robot performance.
+- Mechanism claim: foundation-policy action decoders and classical visual servo loops fail in complementary regimes; the key is calibrated arbitration, not unconditional replacement.
+- Method claim: switching on action-critical visual error, geometry uncertainty, learned-action risk, stability margin, and latency cost improves visual manipulation under shift.
+- Evidence claim: the local benchmark shows the proposed arbiter beats the strongest non-oracle baseline by `0.100 +/- 0.007` combined-stress success, wins `7/7` paired seeds, improves override precision by `0.092`, reduces unsafe learned actions by `0.065`, and survives ablations.
+- Scope claim: results support a strong local submission rebuild, not final ICLR-main readiness.
+- Unsupported claim explicitly avoided: no claim of real-robot SOTA or universal foundation-policy safety.

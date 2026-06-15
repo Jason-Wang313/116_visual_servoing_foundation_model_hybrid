@@ -1,0 +1,4 @@
+case,expected_behavior,observed_failure_mode,lesson
+semantic_policy_correct_but_pixel_error_large,servo override,foundation-only overshoots target,semantic correctness is not local stability
+servo_jacobian_degenerate,foundation action or guarded slowdown,IBVS-only oscillates,classical servo should not always override
+occlusion_plus_depth_scale_error,calibrated arbitration,uncertainty gate over-rejects and slows task,hybrid must model cost and stability together

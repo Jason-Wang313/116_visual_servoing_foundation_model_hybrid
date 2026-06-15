@@ -1,6 +1,8 @@
-ablation,combined_stress_mean_success,ci95_success,interpretation
-full_proposed_branch_mechanism,0.6671,0.0146,all components
-minus_branch_atlas,0.5571,0.0228,removes explicit unrealized futures
-minus_tail_risk_objective,0.5848,0.0140,uses mean predicted value only
-minus_diagnostic_probe,0.5998,0.0122,does not actively test ambiguous physical modes
-minus_failure_memory,0.6024,0.0183,does not reuse repaired beliefs
+ablation,mean_success_rate,ci95_success_rate,mean_override_precision,ci95_override_precision,mean_unsafe_action_rate,ci95_unsafe_action_rate,mean_tracking_error,ci95_tracking_error,mean_damage_rate,ci95_damage_rate,mean_latency_cost,ci95_latency_cost,mean_calibration_error,ci95_calibration_error,groups,episodes_per_group
+full_servo_foundation_arbiter,0.702624,0.007126,0.634270,0.001108,0.090840,0.000891,0.120679,0.001806,0.036127,0.000334,0.223066,0.000391,0.065084,0.000457,245,84
+minus_action_critical_error,0.644461,0.008146,0.572994,0.000938,0.152533,0.001126,0.142222,0.001831,0.057454,0.000422,0.219474,0.000430,0.065852,0.000443,245,84
+minus_geometry_uncertainty,0.632653,0.007293,0.563791,0.000953,0.166612,0.001221,0.146200,0.001741,0.061437,0.000365,0.222722,0.000364,0.066787,0.000455,245,84
+minus_latency_penalty,0.665792,0.007715,0.582109,0.001017,0.130798,0.001061,0.132496,0.001762,0.048736,0.000362,0.277532,0.000447,0.065681,0.000369,245,84
+minus_learned_action_risk,0.645675,0.007660,0.579314,0.001031,0.143348,0.001088,0.137833,0.001791,0.054245,0.000370,0.211144,0.000403,0.066403,0.000412,245,84
+minus_stability_margin,0.630466,0.007559,0.560041,0.001107,0.173534,0.001202,0.147697,0.001777,0.063432,0.000327,0.215441,0.000425,0.066248,0.000426,245,84
+threshold_only_switch,0.593732,0.008578,0.536114,0.000963,0.200330,0.001309,0.158312,0.001751,0.072078,0.000378,0.197894,0.000460,0.066926,0.000359,245,84

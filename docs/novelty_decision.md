@@ -1,7 +1,7 @@
 # Novelty Decision
 
-Chosen thesis: Visual Servoing Foundation-Model Hybrid turns the seed bet into a mechanism: Define when classical servo loops should override learned action decoding.
+Decision: STRONG_REVISE
 
-New central mechanism: Visual servoing foundation model hybrid keeps action-critical alternatives explicit until a physical observation collapses them.
+The v4 rebuild defines a defensible novelty boundary: not visual servoing itself, and not foundation-policy control itself, but calibrated arbitration between them under visual and geometry shift. The local evidence supports this boundary against strong hybrid and risk-gating baselines.
 
-Decision: proceed as a revise/workshop-strength ICLR-style draft with synthetic but runnable evidence.
+The claim remains incomplete without real robot or external high-fidelity evidence.
