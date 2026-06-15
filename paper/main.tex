@@ -6,6 +6,8 @@
 \usepackage{booktabs}
 \usepackage{graphicx}
 \usepackage{amsmath}
+\usepackage{microtype}
+\raggedbottom
 
 \title{Visual Servoing Foundation-Model Hybrid}
 \author{Anonymous Authors}
@@ -14,7 +16,7 @@
 \maketitle
 
 \begin{abstract}
-Foundation policies can propose semantically appropriate robot actions, but local visual servo loops can be safer when the error is geometric and action-critical. The question is not which controller wins globally, but when a classical servo loop should override a learned action decoder. We study a calibrated visual-servo/foundation-policy arbiter in a local benchmark with 5 visual manipulation tasks, 7 visual/geometry shift regimes, 5 deployment splits, 9 controllers, 7 paired seeds, and 84 rollout episodes per group. Under combined stress, the proposed arbiter reaches $0.698 \pm 0.008$ success versus $0.598 \pm 0.008$ for the strongest non-oracle baseline, ensemble risk gating. The paired gain is $0.100 \pm 0.007$ with wins on 7/7 seeds. The arbiter also improves override precision, reduces unsafe learned actions, lowers tracking error, damage, and latency/control cost, and survives ablations. This is strong local evidence for a submission rebuild, but not final ICLR-main readiness without real robot or external high-fidelity validation.
+Foundation policies can propose semantically appropriate robot actions, but local visual servo loops can be safer when the error is geometric and action-critical. The question is not which controller wins globally, but when a classical servo loop should override a learned action decoder. We study a calibrated visual-servo/foundation-policy arbiter in a v4.1 local benchmark with 5 visual manipulation tasks, 7 visual/geometry shift regimes, 5 deployment splits, 9 controllers, 7 paired seeds, 84 rollout episodes per group, 5,880 task/regime/seed stress rows, and 8 documented failure cases. Under combined stress, the proposed arbiter reaches $0.698 \pm 0.008$ success versus $0.598 \pm 0.008$ for the strongest non-oracle baseline, ensemble risk gating. The paired gain is $0.100 \pm 0.007$ with wins on 7/7 seeds. The arbiter also improves override precision, reduces unsafe learned actions, lowers tracking error, damage, and latency/control cost, and survives ablations. This is strong local evidence for a submission rebuild, but not final ICLR-main readiness without real robot or external high-fidelity validation.
 \end{abstract}
 
 \section{Motivation}
@@ -44,9 +46,11 @@ The benchmark includes eye-in-hand peg insertion, visual grasp centering, drawer
 
 Baselines include foundation policy only, classical IBVS, position-based visual servoing, fixed hybrid switching, uncertainty-gated foundation control, CBF safety shielding, ensemble risk gating, the proposed arbiter, and an oracle arbiter.
 
+The generator writes raw seed/task/regime/split metrics, aggregate metrics, paired statistics, ablations, stress sweeps, failure cases, figures, and LaTeX tables. The v4.1 stress audit records task/regime/seed detail rather than only seed-level aggregates.
+
 \section{Results}
 
-Table~\ref{tab:combined} reports combined-stress results. The strongest non-oracle baseline is \texttt{ensemble\_risk\_gate}. The proposed arbiter improves success by $0.100 \pm 0.007$, override precision by $0.092$, and reduces unsafe learned actions by $0.065$. It also lowers tracking error by $0.025$, damage by $0.022$, and latency/control cost by $0.022$.
+Table~\ref{tab:combined} reports combined-stress results. The strongest non-oracle baseline is ensemble risk gating. The proposed arbiter improves success by $0.100 \pm 0.007$, override precision by $0.092$, and reduces unsafe learned actions by $0.065$. It also lowers tracking error by $0.025$, damage by $0.022$, and latency/control cost by $0.022$.
 
 \begin{table}[t]
 \centering
@@ -85,7 +89,7 @@ Table~\ref{tab:ablation} shows that stability margin, action-critical visual err
 \end{table}
 
 \paragraph{Stress sweep.}
-Figure~\ref{fig:stress} increases visual aliasing and Jacobian mismatch. The proposed arbiter degrades more gracefully than foundation-only control and ensemble risk gating, though it remains below the oracle.
+Figure~\ref{fig:stress} increases visual aliasing and Jacobian mismatch over 5,880 task/regime/seed rows. The proposed arbiter degrades more gracefully than foundation-only control and ensemble risk gating, though it remains below the oracle. At maximum stress, the proposed arbiter reaches $0.655 \pm 0.004$ success versus $0.518 \pm 0.005$ for ensemble risk gating and $0.773 \pm 0.005$ for the oracle.
 
 \begin{figure}[t]
 \centering
@@ -93,6 +97,10 @@ Figure~\ref{fig:stress} increases visual aliasing and Jacobian mismatch. The pro
 \caption{Stress sweep over visual aliasing and servo Jacobian mismatch.}
 \label{fig:stress}
 \end{figure}
+
+\section{Failure Cases}
+
+The failure-case audit records eight boundaries: semantic foundation actions that are locally unstable, degenerate servo Jacobians, occlusion plus depth-scale error, hidden singularities under image crops, field-of-view escape after large learned actions, latency-induced override harm, misleading calibration after relighting, and remaining oracle headroom under compound visual/geometry shift. These cases require real interventional robot data, external visual-control benchmarks, released controller artifacts, and hardware videos before this can be treated as submission-ready.
 
 \section{Related Work Boundary}
 
@@ -102,7 +110,10 @@ Image-based visual servoing, position-based visual servoing, sliding-mode visual
 
 The evidence is local and generated by the released benchmark. It is stronger than the archived scaffold but still lacks real robot experiments, external high-fidelity simulator transfer, released controller artifacts, and hardware videos. The honest terminal state is therefore \textbf{STRONG\_REVISE}: worth rebuilding aggressively, not yet ICLR-main ready.
 
+\begingroup
+\raggedright
 \bibliographystyle{iclr2026_conference}
 \bibliography{references}
+\endgroup
 
 \end{document}

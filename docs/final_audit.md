@@ -2,7 +2,7 @@
 
 Paper: 116 visual_servoing_foundation_model_hybrid
 
-Submission-hardening version: v4
+Submission-hardening version: v4.1
 
 Terminal decision: STRONG_REVISE
 
@@ -19,6 +19,13 @@ Key results:
 - Damage delta: `-0.022`.
 - Latency-cost delta: `-0.022`.
 - Best ablation gap: `0.037`.
+- Stress sweep coverage: `5,880` task/regime/seed rows and `24` aggregate rows.
+- Failure cases: `8` documented visual-servo/foundation-policy boundary cases.
+- Numeric integrity: no NaN or infinite values found across result CSVs.
+- Canonical PDF: `C:/Users/wangz/Downloads/116.pdf`.
+- PDF SHA256: `AC3D68DDC3424ECCE788994F5B6147232F5A6FF50EE9C6C4454D9B2A207FA91D`.
+- PDF size: `385597` bytes.
+- Desktop PDF copy: absent.
 
 ## Remaining Risk
 

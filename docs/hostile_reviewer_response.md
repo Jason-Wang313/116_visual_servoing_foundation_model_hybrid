@@ -14,4 +14,4 @@ Response: Ablations reject that. The full method reaches `0.703 +/- 0.007`; the 
 
 ## Reviewer Attack: The paper is not ready for ICLR main.
 
-Response: Agreed. The honest decision is `STRONG_REVISE`, not ready. It needs real robot or external high-fidelity validation and released controller artifacts.
+Response: Agreed. The honest decision is `STRONG_REVISE`, not ready. The v4.1 evidence has 5,880 detailed stress rows and 8 failure cases, but it still needs real robot or external high-fidelity validation and released controller artifacts.

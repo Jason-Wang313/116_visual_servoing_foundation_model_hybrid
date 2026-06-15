@@ -9,9 +9,9 @@
 - [x] 9 controllers including strong baselines and oracle upper bound.
 - [x] 7 paired seeds and 84 rollout episodes per group.
 - [x] Pairwise seed differences and win counts.
-- [x] Stress sweep over visual aliasing and Jacobian mismatch.
+- [x] Stress sweep over visual aliasing and Jacobian mismatch with task/regime/seed detail.
 - [x] Core ablations with a predeclared margin gate.
-- [x] Failure cases, figures, and LaTeX tables.
+- [x] Eight failure cases, figures, and LaTeX tables.
 
 ## ICLR Main Remaining Gaps
 
