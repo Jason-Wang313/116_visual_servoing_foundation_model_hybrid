@@ -1,18 +1,21 @@
 # Submission Version Log
 
-## v1 - Generated Draft
-- Original continuation-batch generated paper and toy single-seed experiment.
+## v1
 
-## v2 - Submission Hardening
-- Added hostile reviewer attack log and response docs.
-- Replaced the toy experiment with seven-seed metrics, stronger baselines, ablations, stress tests, and negative cases.
-- Narrowed claims to synthetic diagnostic evidence.
-- Recompiled canonical PDF at `C:/Users/wangz/Downloads/116.pdf`.
-- Terminal decision: WORKSHOP_ONLY.
+Generated draft scaffold.
 
-## v3 - ICLR Main Gate Archive
-- Applied the stricter ICLR-main-conference standard.
-- Re-read local paper, docs, experiments, prior-work artifacts, PDF state, and repo state.
-- Determined that missing real-robot/high-fidelity evidence, template-generated experiments, and unresolved novelty threats are not recoverable from local artifacts.
-- Recompiled the canonical PDF with `Submission-hardening version: v3`.
-- Terminal decision: KILL_ARCHIVE.
+## v2
+
+Workshop-level synthetic stress-test pass.
+
+## v3
+
+ICLR-main gate archive pass. Decision: KILL_ARCHIVE because the paper lacked paper-specific empirical evidence, implemented baselines, and real robot/high-fidelity validation.
+
+## v4
+
+Rebuilt as a visual servo/foundation-policy hybrid empirical package. Added paper-specific benchmark, strong baselines, paired-seed tests, stress sweep, ablations, figures, tables, revised docs, and an evidence manuscript.
+
+Terminal decision: STRONG_REVISE.
+
+Remaining gap: real robot or external high-fidelity validation.

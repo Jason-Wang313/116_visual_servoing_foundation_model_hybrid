@@ -2,18 +2,28 @@
 
 Paper: 116 visual_servoing_foundation_model_hybrid
 
-Existing v2 decision: KILL_ARCHIVE
+Existing v3 decision: KILL_ARCHIVE
 
-Gate verdict: KILL_ARCHIVE
+v4 gate verdict: STRONG_REVISE
 
-Evidence digest: 3c56eae80cf57398
+Evidence digest: visual-servo-foundation-hybrid-local-v4
 
-Fatal blockers:
-- Synthetic-only evidence.
-- Template-generated experiment and writing.
-- No real robot or high-fidelity benchmark.
-- No trained WAM/model checkpoint.
-- No implemented real baselines.
-- No manual exhaustive related-work synthesis.
+## Passed Local Gates
 
-The only honest main-conference-safe decision is to archive rather than overclaim.
+- Success margin over strongest non-oracle baseline: `0.100 >= 0.030`.
+- Override-precision delta: `0.092 >= 0.030`.
+- Unsafe-action delta: `-0.065 <= -0.020`.
+- Tracking-error delta: `-0.025 <= 0`.
+- Damage delta: `-0.022 <= 0`.
+- Latency-cost delta: `-0.022 <= 0`.
+- Paired-seed wins: `7/7 >= 5/7`.
+- Ablation margin: `0.037 >= 0.020`.
+
+## Remaining Main-Conference Blockers
+
+- No real robot validation.
+- No external high-fidelity simulator benchmark.
+- No released controller/checkpoint artifacts.
+- Related work still needs manual full-paper synthesis.
+
+The only honest main-conference-safe terminal state is STRONG_REVISE.

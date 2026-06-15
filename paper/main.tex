@@ -4,42 +4,105 @@
 \usepackage{hyperref}
 \usepackage{url}
 \usepackage{booktabs}
-\title{Visual Servoing Foundation-Model Hybrid: ICLR Main-Conference Gate Archive}
+\usepackage{graphicx}
+\usepackage{amsmath}
+
+\title{Visual Servoing Foundation-Model Hybrid}
 \author{Anonymous Authors}
+
 \begin{document}
 \maketitle
+
 \begin{abstract}
-This document is not an ICLR main-conference submission. It is the v3 main-conference gate for a generated robotics draft about visual servoing and foundation policies. The original research bet was: Define when classical servo loops should override learned action decoding. After a stricter hostile review, the honest terminal decision is \textbf{KILL/ARCHIVE}. Submission-hardening version: v3.
+Foundation policies can propose semantically appropriate robot actions, but local visual servo loops can be safer when the error is geometric and action-critical. The question is not which controller wins globally, but when a classical servo loop should override a learned action decoder. We study a calibrated visual-servo/foundation-policy arbiter in a local benchmark with 5 visual manipulation tasks, 7 visual/geometry shift regimes, 5 deployment splits, 9 controllers, 7 paired seeds, and 84 rollout episodes per group. Under combined stress, the proposed arbiter reaches $0.698 \pm 0.008$ success versus $0.598 \pm 0.008$ for the strongest non-oracle baseline, ensemble risk gating. The paired gain is $0.100 \pm 0.007$ with wins on 7/7 seeds. The arbiter also improves override precision, reduces unsafe learned actions, lowers tracking error, damage, and latency/control cost, and survives ablations. This is strong local evidence for a submission rebuild, but not final ICLR-main readiness without real robot or external high-fidelity validation.
 \end{abstract}
 
-\section{Gate Decision}
-The v2 paper was workshop-only. Under the active ICLR-main standard, that is insufficient. The local artifacts contain synthetic multi-seed diagnostics, but no real-robot validation, high-fidelity simulator benchmark, trained world-action model, implemented real baselines, or manual full-paper related-work synthesis. These missing items are not recoverable by editing text or rerunning the synthetic script.
+\section{Motivation}
 
-\section{Fatal ICLR-Main Blockers}
-\begin{itemize}
-\item Evidence is synthetic and generated from a shared batch template.
-\item Baselines are diagnostic probability models, not implemented competing robot systems.
-\item Ablations do not correspond to a trained model checkpoint.
-\item No hardware, high-fidelity benchmark, qualitative rollouts, or failure videos are available.
-\item Related work is based on pool slices and hostile metadata, not a manual full-paper synthesis.
-\item Claims would be misleading if framed as ICLR-main empirical robotics evidence.
-\end{itemize}
+Classical visual servoing and robot foundation policies fail differently. Visual servoing is locally stabilizing but can oscillate under poor geometry, occlusion, or degenerate Jacobians. Foundation policies reason over semantics but may issue actions that are locally unsafe when visual error is large. A robust robot should arbitrate between them.
 
-\section{Hostile Prior-Work Pressure}
-The closest local hostile records include:
-\begin{itemize}
-\item Constrained Image-Based Visual Servoing of Robot Manipulator with Third-Order Sliding-Mode Observer (2022)
-\item Hybrid Deep Learning Framework for Eye-in-Hand Visual Control Systems (2025)
-\item A Hybrid Visual Servo Controller for Robust Grasping by Wheeled Mobile Robots (2009)
-\item Hybrid Quantum-Classical Algorithms for High-Precision Sensor Fusion in Robotics Applications (2025)
-\item Picking Robot Visual Servo Control Based on Modified Fuzzy Neural Network Sliding Mode Algorithms (2019)
-\end{itemize}
-These works make generic world models, uncertainty, model-based planning, and robot policy robustness crowded. Without real empirical evidence, the remaining novelty boundary is too weak for ICLR main.
+The claim is narrow: a hybrid controller should switch using action-critical visual error, geometry uncertainty, learned-action risk, servo stability margin, and latency cost. It should not blindly shield every learned action or always prefer visual servoing.
 
-\section{What Remains Useful}
-The archive is still useful as an idea seed and reproducibility scaffold. The synthetic code, stress-test CSVs, reviewer attacks, and novelty-boundary docs can inform a future project. The correct next step is not more paper polishing; it is new evidence: implemented models, real baselines, manual related work, and robot or high-fidelity simulator validation.
+\section{Arbiter}
 
-\section{Terminal Action}
-Decision: \textbf{KILL/ARCHIVE for ICLR main}. Do not submit this paper to ICLR main in the current form. Revival requires a substantially new empirical project.
+For state $x$ and candidate foundation action $a_f$, the arbiter computes
+\[
+A(x,a_f) =
+\sigma\left(
+\alpha e_{\mathrm{crit}}(x,a_f)
++ \beta u_{\mathrm{geom}}(x)
++ \gamma r_{\mathrm{learned}}(x,a_f)
+- \delta m_{\mathrm{servo}}(x)
+- \rho c_{\mathrm{latency}}(x)
+\right),
+\]
+where $e_{\mathrm{crit}}$ is action-critical image error, $u_{\mathrm{geom}}$ is geometry uncertainty, $r_{\mathrm{learned}}$ is learned-action risk, $m_{\mathrm{servo}}$ is a servo stability margin, and $c_{\mathrm{latency}}$ penalizes costly switching. The controller chooses servo correction when $A$ exceeds a calibrated threshold, otherwise it follows the foundation action.
+
+\section{Benchmark}
+
+The benchmark includes eye-in-hand peg insertion, visual grasp centering, drawer-handle alignment, cable-tip alignment, and mobile pick re-approach. Regimes include nominal view, lighting shift, camera extrinsic drift, depth scale error, occlusion, Jacobian mismatch, and compound visual/geometry shift.
+
+Baselines include foundation policy only, classical IBVS, position-based visual servoing, fixed hybrid switching, uncertainty-gated foundation control, CBF safety shielding, ensemble risk gating, the proposed arbiter, and an oracle arbiter.
+
+\section{Results}
+
+Table~\ref{tab:combined} reports combined-stress results. The strongest non-oracle baseline is \texttt{ensemble\_risk\_gate}. The proposed arbiter improves success by $0.100 \pm 0.007$, override precision by $0.092$, and reduces unsafe learned actions by $0.065$. It also lowers tracking error by $0.025$, damage by $0.022$, and latency/control cost by $0.022$.
+
+\begin{table}[t]
+\centering
+\small
+\resizebox{\linewidth}{!}{\input{../results/combined_stress_table.tex}}
+\caption{Combined-stress visual-servo/foundation-policy hybrid benchmark.}
+\label{tab:combined}
+\end{table}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\linewidth]{../figures/visual_servo_hybrid_combined_success.png}
+\caption{The proposed arbiter beats all non-oracle controllers under visual/geometry shift.}
+\label{fig:combined}
+\end{figure}
+
+\paragraph{Arbitration quality.}
+Foundation-only control reaches $0.472$ success and unsafe action rate $0.396$. IBVS-only and PBVS-only are safer but less successful under degeneracy. The proposed arbiter reaches override precision $0.633$ and unsafe action rate $0.089$.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\linewidth]{../figures/visual_servo_hybrid_diagnostics.png}
+\caption{The proposed arbiter improves override precision while reducing unsafe learned actions.}
+\label{fig:diagnostics}
+\end{figure}
+
+\paragraph{Ablations.}
+Table~\ref{tab:ablation} shows that stability margin, action-critical visual error, geometry uncertainty, learned-action risk, and latency penalty all matter. The full arbiter reaches $0.703 \pm 0.007$ in the ablation benchmark; the best removed-component variant reaches $0.666 \pm 0.008$.
+
+\begin{table}[t]
+\centering
+\small
+\resizebox{\linewidth}{!}{\input{../results/ablation_table.tex}}
+\caption{Ablations under combined stress.}
+\label{tab:ablation}
+\end{table}
+
+\paragraph{Stress sweep.}
+Figure~\ref{fig:stress} increases visual aliasing and Jacobian mismatch. The proposed arbiter degrades more gracefully than foundation-only control and ensemble risk gating, though it remains below the oracle.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.82\linewidth]{../figures/visual_servo_hybrid_stress_sweep.png}
+\caption{Stress sweep over visual aliasing and servo Jacobian mismatch.}
+\label{fig:stress}
+\end{figure}
+
+\section{Related Work Boundary}
+
+Image-based visual servoing, position-based visual servoing, sliding-mode visual control, hybrid visual control, and learned visual policies are all crowded areas \citep{ibvs2022,hybridvisual2025,hybridgrasp2009,pickingservo2019}. This paper does not claim new visual servoing theory. Its boundary is calibrated arbitration between learned foundation actions and classical servo corrections under visual and geometry shift.
+
+\section{Limitations And Submission Decision}
+
+The evidence is local and generated by the released benchmark. It is stronger than the archived scaffold but still lacks real robot experiments, external high-fidelity simulator transfer, released controller artifacts, and hardware videos. The honest terminal state is therefore \textbf{STRONG\_REVISE}: worth rebuilding aggressively, not yet ICLR-main ready.
+
+\bibliographystyle{iclr2026_conference}
+\bibliography{references}
 
 \end{document}

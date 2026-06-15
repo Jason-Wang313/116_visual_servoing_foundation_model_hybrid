@@ -1,13 +1,21 @@
 # Novelty Boundary Map
 
-## Crowded Territory
-- Bigger data/model scaling.
-- New benchmark only.
-- Generic active learning or uncertainty.
-- Combining a planner with a learned policy without a new state/action object.
+## Inside The Claim
 
-## Claimed Boundary
-Visual servoing foundation model hybrid keeps action-critical alternatives explicit until a physical observation collapses them.
+- Calibrated arbitration between learned action decoding and visual servo correction.
+- Action-critical visual error and geometry uncertainty.
+- Servo stability margin and learned-action risk.
+- Latency-aware switching.
+- Downstream control metrics under visual/geometry shift.
 
-## What Would Falsify The Claim
-If observed-only baselines match the adverse-mode coverage and closed-loop success of the proposed branch-aware mechanism, the paper should be revised or killed.
+## Outside The Claim
+
+- New visual servoing theory.
+- Real hardware SOTA.
+- Universal VLA safety.
+- Replacing CBF shields.
+- External benchmark generality.
+
+## Closest Baseline Boundary
+
+The closest local competitor is `ensemble_risk_gate`. It detects risky learned actions but does not model servo stability and action-critical visual error jointly. The proposed arbiter wins by `0.100 +/- 0.007` combined-stress success.
