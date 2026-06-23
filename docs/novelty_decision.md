@@ -1,7 +1,5 @@
 # Novelty Decision
 
-Decision: STRONG_REVISE
+The defensible novelty boundary is not visual servoing itself and not foundation-policy control itself. The boundary is stability-calibrated arbitration between the two under hard visual and geometry shift, with fixed-risk deployment accounting.
 
-The v4.1 rebuild defines a defensible novelty boundary: not visual servoing itself, and not foundation-policy control itself, but calibrated arbitration between them under visual and geometry shift. The local evidence supports this boundary against strong hybrid and risk-gating baselines.
-
-The claim remains incomplete without real robot or external high-fidelity evidence.
+Local novelty is sufficient for STRONG_REVISE. It is not sufficient for ICLR-main readiness without external validation and deeper related-work synthesis.

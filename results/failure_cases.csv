@@ -1,9 +1,25 @@
-case,expected_behavior,observed_failure_mode,lesson
-semantic_policy_correct_but_pixel_error_large,servo override,foundation-only overshoots target,semantic correctness is not local stability
-servo_jacobian_degenerate,foundation action or guarded slowdown,IBVS-only oscillates,classical servo should not always override
-occlusion_plus_depth_scale_error,calibrated arbitration,uncertainty gate over-rejects and slows task,hybrid must model cost and stability together
-hidden_jacobian_singularity_under_crop,detect unstable local geometry before override,arbiter accepts a servo step near a singular interaction matrix,servo confidence needs geometry-aware stability margins
-field_of_view_escape_after_large_foundation_step,prefer bounded servo correction,learned action moves the target outside the camera field of view,semantic action quality can still break visual feedback
-latency_induced_override_harm,account for switching and control delay,late override destabilizes an otherwise recoverable foundation action,hybrid arbitration needs timing as well as risk
-calibration_confidence_misleading_after_relighting,downweight learned confidence under visual shift,calibrated gate trusts a visually aliased learned action,confidence calibration must be audited under perception shift
-oracle_gap_under_compound_visual_geometry_shift,approach oracle arbitration under maximum stress,oracle remains substantially better at high aliasing and Jacobian mismatch,local arbiter is useful but not saturated
+case_id,failure_case,reviewer_attack,v5_response,remaining_blocker
+1,semantic_correct_geometric_wrong,Foundation action names the right target but moves outside the local image basin.,v5 switches to servo when action-critical error and Jacobian margin conflict.,external robot or accepted high-fidelity validation required
+2,degenerate_ibvs_jacobian,IBVS update becomes ill-conditioned near a thin cable or specular edge.,v5 refuses servo-only correction when the stability margin collapses.,external robot or accepted high-fidelity validation required
+3,pbvs_depth_scale_error,PBVS correction trusts biased depth scale and overshoots the handle.,v5 prices geometry uncertainty into arbitration.,external robot or accepted high-fidelity validation required
+4,occluded_contact_point,Occlusion hides the point that matters for insertion or grasp centering.,v5 abstains or chooses local servo only when predicted risk stays inside budget.,external robot or accepted high-fidelity validation required
+5,fov_escape_after_learned_action,A learned action leaves the feature outside the camera field of view.,v5 penalizes large foundation actions under high field-of-view escape risk.,external robot or accepted high-fidelity validation required
+6,latency_induced_override_harm,Frequent switching causes stale visual correction.,v5 includes a latency penalty and fixed-risk deployment screen.,external robot or accepted high-fidelity validation required
+7,misleading_uncertainty_low,A foundation ensemble is confident but wrong under camera drift.,"v5 requires stability and action-risk terms, not uncertainty alone.",external robot or accepted high-fidelity validation required
+8,calibration_drift_relighting,Relighting changes confidence calibration without changing task semantics.,v5 calibration guard catches part of the shift but not all of it.,external robot or accepted high-fidelity validation required
+9,mobile_reapproach_geometry_gap,Base motion shifts camera geometry between foundation proposal and servo correction.,v5 detects geometry gap but still needs high-fidelity validation.,external robot or accepted high-fidelity validation required
+10,drawer_handle_aliasing,Similar visual edges produce a wrong handle alignment.,v5 improves but still trails oracle arbitration.,external robot or accepted high-fidelity validation required
+11,cable_tip_partial_occlusion,A thin deformable cable tip vanishes behind the gripper.,v5 cannot recover if neither controller has the needed visual feature.,external robot or accepted high-fidelity validation required
+12,peg_insert_specular_highlight,A highlight is mistaken for the hole rim.,v5 reduces unsafe learned actions but needs real optical variation data.,external robot or accepted high-fidelity validation required
+13,depth_sensor_dropouts,Depth dropouts make PBVS unstable while the learned policy remains semantically plausible.,v5 can prefer foundation action when servo geometry is unreliable.,external robot or accepted high-fidelity validation required
+14,contact_before_visual_convergence,The robot contacts the object before image error is fully corrected.,v5 reduces but does not eliminate damage.,external robot or accepted high-fidelity validation required
+15,oversafe_abstention,A strict risk budget rejects many feasible cases.,v5 reports coverage honestly rather than hiding abstention.,external robot or accepted high-fidelity validation required
+16,underconfident_foundation_policy,The learned policy is uncertain but locally safe.,v5 avoids uncertainty-only rejection.,external robot or accepted high-fidelity validation required
+17,servo_limit_cycle,Pure servoing oscillates around a visually ambiguous feature.,v5 prefers learned action or abstains depending on predicted risk.,external robot or accepted high-fidelity validation required
+18,model_predictive_latency,MPC handoff succeeds but is too slow under fast visual drift.,v5 exposes latency as a metric rather than only success.,external robot or accepted high-fidelity validation required
+19,adversarial_background_texture,Background texture creates a spurious visual feature.,v5 improves calibration but still needs real background diversity.,external robot or accepted high-fidelity validation required
+20,heldout_object_reflectance,Heldout object reflectance changes feature detection.,v5 stress tests reflectance but does not claim hardware generality.,external robot or accepted high-fidelity validation required
+21,compound_shift_oracle_gap,Oracle remains far ahead under compound visual/geometry shift.,The remaining oracle gap is reported as a limitation.,external robot or accepted high-fidelity validation required
+22,foundation_policy_shortcut,Foundation action exploits training-set camera bias.,v5 catches part of the shortcut through action-risk scoring.,external robot or accepted high-fidelity validation required
+23,risk_score_miscalibration,Baselines accept unsafe cases at fixed risk because predicted risk is undercalibrated.,v5 uses conservative calibration and reports breach rates.,external robot or accepted high-fidelity validation required
+24,unmodeled_compliance,Object compliance changes the servo response.,The scope gate demands real robot or high-fidelity evidence before submission.,external robot or accepted high-fidelity validation required

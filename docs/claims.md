@@ -1,7 +1,9 @@
 # Claims
 
-- Mechanism claim: foundation-policy action decoders and classical visual servo loops fail in complementary regimes; the key is calibrated arbitration, not unconditional replacement.
-- Method claim: switching on action-critical visual error, geometry uncertainty, learned-action risk, stability margin, and latency cost improves visual manipulation under shift.
-- Evidence claim: the local benchmark shows the proposed arbiter beats the strongest non-oracle baseline by `0.100 +/- 0.007` combined-stress success, wins `7/7` paired seeds, improves override precision by `0.092`, reduces unsafe learned actions by `0.065`, and survives ablations.
-- Scope claim: results support a strong local submission rebuild, not final ICLR-main readiness.
-- Unsupported claim explicitly avoided: no claim of real-robot SOTA or universal foundation-policy safety.
+## Supported Local Claim
+
+The v5 local benchmark supports a narrow claim: stability-calibrated arbitration between visual servoing and foundation-policy actions improves hard-slice success, hard utility, override precision, unsafe-action rate, tracking error, damage, latency, calibration, ablations, stress endpoints, and fixed-risk utility against the retained v4 baseline.
+
+## Unsupported Submission Claim
+
+The repo does not support an ICLR-main-ready claim. It has no real robot validation, no accepted high-fidelity simulator validation, no released controller or foundation-policy checkpoint, no calibrated deployment logs, no hardware videos, and no complete manual full-paper related-work synthesis.

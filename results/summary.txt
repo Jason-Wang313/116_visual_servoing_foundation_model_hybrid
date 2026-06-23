@@ -1,33 +1,9 @@
-Paper 116 visual servoing foundation-model hybrid local evidence rebuild
-Design: 5 visual tasks x 7 visual/geometry regimes x 5 deployment splits x 9 controllers, 7 seeds, 84 rollout episodes per group.
-Terminal decision: STRONG_REVISE
-Strongest non-oracle baseline under combined stress: ensemble_risk_gate
-Proposed combined-stress success: 0.698 +/- 0.008
-Strongest baseline combined-stress success: 0.598 +/- 0.008
-Pairwise proposed-minus-strongest success diff: 0.100 +/- 0.007; wins=7/7
-Override-precision delta: 0.092
-Unsafe-action delta: -0.065
-Tracking-error delta: -0.025
-Damage delta: -0.022
-Latency-cost delta: -0.022
-Ablation margin over best removed component (minus_latency_penalty): 0.037
-Gate results:
-- success_margin_ge_0.030: True
-- override_precision_delta_ge_0.030: True
-- unsafe_action_delta_le_-0.020: True
-- tracking_error_delta_le_0: True
-- damage_delta_le_0: True
-- latency_cost_delta_le_0: True
-- paired_seed_wins_ge_5: True
-- ablation_margin_ge_0.020: True
-
-Combined-stress ranking:
-- oracle_arbiter: success=0.797 +/- 0.006; precision=0.711; unsafe=0.046; track=0.099; damage=0.020; latency=0.174
-- proposed_servo_foundation_arbiter: success=0.698 +/- 0.008; precision=0.633; unsafe=0.089; track=0.121; damage=0.036; latency=0.222
-- ensemble_risk_gate: success=0.598 +/- 0.008; precision=0.542; unsafe=0.154; track=0.145; damage=0.058; latency=0.244
-- uncertainty_gated_foundation: success=0.568 +/- 0.009; precision=0.511; unsafe=0.196; track=0.156; damage=0.071; latency=0.255
-- cbf_safety_shield: success=0.559 +/- 0.008; precision=0.526; unsafe=0.167; track=0.150; damage=0.062; latency=0.271
-- fixed_hybrid_switch: success=0.538 +/- 0.009; precision=0.480; unsafe=0.220; track=0.161; damage=0.077; latency=0.197
-- foundation_policy_only: success=0.472 +/- 0.011; precision=0.204; unsafe=0.396; track=0.251; damage=0.131; latency=0.137
-- position_based_visual_servo: success=0.463 +/- 0.008; precision=0.423; unsafe=0.189; track=0.181; damage=0.085; latency=0.163
-- classical_ibvs_only: success=0.445 +/- 0.008; precision=0.444; unsafe=0.160; track=0.165; damage=0.079; latency=0.169
+Paper 116 v5_expanded
+terminal_decision: STRONG_REVISE
+iclr_main_ready: False
+proposed: stability_calibrated_servo_foundation_arbiter_v5
+strongest_non_oracle: proposed_servo_foundation_arbiter_v4
+hard_success: 0.79741 vs 0.73322
+hard_utility: 0.92520 vs 0.79004
+strict_fixed_risk_coverage: 0.94312
+strict_fixed_risk_breach: 0.00000

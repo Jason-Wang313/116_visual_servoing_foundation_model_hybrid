@@ -1,0 +1,16 @@
+baseline,mean_utility_diff,ci95_utility_diff,mean_success_diff,paired_seed_wins,non_oracle,decisive
+cbf_safety_shield,0.427016,0.000348,0.234597,10,True,True
+classical_ibvs_only,0.558190,0.000240,0.341603,10,True,True
+conformal_visual_abstention,0.326732,0.000305,0.189002,10,True,True
+ensemble_risk_gate,0.355349,0.000256,0.185436,10,True,True
+fixed_hybrid_switch,0.511512,0.000299,0.256931,10,True,True
+foundation_policy_only,0.852351,0.000398,0.312252,10,True,True
+latency_optimized_switch,0.305647,0.000201,0.158241,10,True,True
+learned_residual_servoing,0.274551,0.000316,0.139283,10,True,True
+model_predictive_servoing,0.293044,0.000316,0.164954,10,True,True
+oracle_visual_servo_foundation_arbiter,-0.181402,0.000390,-0.108556,0,False,False
+position_based_visual_servo,0.580068,0.000416,0.328260,10,True,True
+proposed_servo_foundation_arbiter_v4,0.135159,0.000260,0.064188,10,True,True
+risk_sensitive_foundation_ensemble,0.243858,0.000277,0.113686,10,True,True
+robust_mpc_handoff,0.325642,0.000349,0.177902,10,True,True
+uncertainty_gated_foundation,0.452471,0.000348,0.219503,10,True,True

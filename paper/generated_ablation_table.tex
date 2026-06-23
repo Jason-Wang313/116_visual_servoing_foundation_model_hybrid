@@ -1,0 +1,16 @@
+\begin{tabular}{llllll}
+\toprule
+ablation & success & utility & unsafe & tracking & latency \\
+\midrule
+full\_stability\_calibrated\_arbiter\_v5 & 0.8102 & 0.9477 & 0.0507 & 0.0676 & 0.1893 \\
+minus\_jacobian\_margin & 0.7782 & 0.8832 & 0.0630 & 0.0942 & 0.1880 \\
+minus\_latency\_penalty & 0.7825 & 0.8813 & 0.0608 & 0.0860 & 0.2649 \\
+minus\_calibration\_guard & 0.7833 & 0.8796 & 0.0730 & 0.0846 & 0.1880 \\
+minus\_foundation\_action\_risk & 0.7850 & 0.8777 & 0.0860 & 0.0831 & 0.1858 \\
+minus\_fixed\_risk\_screen & 0.7831 & 0.8766 & 0.0866 & 0.0850 & 0.1859 \\
+minus\_action\_critical\_error & 0.7753 & 0.8699 & 0.0731 & 0.0886 & 0.1899 \\
+servo\_only\_preference & 0.7486 & 0.8310 & 0.0706 & 0.0983 & 0.2203 \\
+uncertainty\_only\_gate & 0.7520 & 0.8114 & 0.0948 & 0.1032 & 0.2102 \\
+foundation\_only\_preference & 0.7355 & 0.7732 & 0.1110 & 0.1199 & 0.1806 \\
+\bottomrule
+\end{tabular}

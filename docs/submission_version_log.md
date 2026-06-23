@@ -1,29 +1,13 @@
 # Submission Version Log
 
-## v1
+## early scaffold
 
-Generated draft scaffold.
+Template scaffold. Decision was negative because paper-specific empirical evidence and implemented baselines were missing.
 
-## v2
+## intermediate local pass
 
-Workshop-level synthetic stress-test pass.
+Local visual-servo/foundation-policy hybrid benchmark. Decision: STRONG_REVISE but short, under-expanded, and not ICLR-main ready.
 
-## v3
+## v5_expanded
 
-ICLR-main gate archive pass. Decision: KILL_ARCHIVE because the paper lacked paper-specific empirical evidence, implemented baselines, and real robot/high-fidelity validation.
-
-## v4
-
-Rebuilt as a visual servo/foundation-policy hybrid empirical package. Added paper-specific benchmark, strong baselines, paired-seed tests, stress sweep, ablations, figures, tables, revised docs, and an evidence manuscript.
-
-Terminal decision: STRONG_REVISE.
-
-Remaining gap: real robot or external high-fidelity validation.
-
-## v4.1
-
-Reran the experiment under low-RAM thread caps, expanded `stress_sweep_seed_metrics.csv` to 5,880 task/regime/seed rows, expanded `failure_cases.csv` to 8 documented boundaries, rechecked row counts and numeric integrity, and hardened manuscript/docs around the same evidence-bound terminal state.
-
-Terminal decision: STRONG_REVISE.
-
-Remaining gap: real robot or independent high-fidelity validation, released controller/checkpoint artifacts, and deeper manual related-work synthesis.
+Expanded-standard rebuild completed 2026-06-23. Added retained v4 baseline, 16-controller hard suite, 409,600 main cells, 8,000 ablation cells, 48,000 stress cells, 51,200 fixed-risk cells, 24 failure cases, generated tables/figures, 27-page PDF with bright boxed clickable citations, validator, visual QA, and Downloads-only artifact placement. Decision remains STRONG_REVISE because external validation is absent.

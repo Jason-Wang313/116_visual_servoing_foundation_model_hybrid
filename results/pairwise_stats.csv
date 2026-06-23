@@ -1,9 +1,0 @@
-baseline,mean_success_diff,ci95_success_diff,paired_seed_wins,non_oracle,decisive
-cbf_safety_shield,0.138387,0.011433,7,True,True
-classical_ibvs_only,0.252381,0.008943,7,True,True
-ensemble_risk_gate,0.100049,0.006573,7,True,True
-fixed_hybrid_switch,0.159718,0.009650,7,True,True
-foundation_policy_only,0.225802,0.012778,7,True,True
-oracle_arbiter,-0.099708,0.007894,0,False,False
-position_based_visual_servo,0.235083,0.008845,7,True,True
-uncertainty_gated_foundation,0.130029,0.009776,7,True,True

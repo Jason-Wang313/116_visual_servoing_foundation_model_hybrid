@@ -1,17 +1,21 @@
 # Hostile Reviewer Response
 
-## Reviewer Attack: Classical visual servoing already solves this.
+## Attack: The method is just a switch.
 
-Response: IBVS-only reaches `0.445` combined-stress success and PBVS reaches `0.463`, because classical loops fail under degeneracy, occlusion, and Jacobian mismatch.
+Response: The v5 method reports explicit stability, action-risk, calibration, latency, and fixed-risk components, then ablates them. The full method beats the best ablation by `0.03195` success and `0.06447` utility.
 
-## Reviewer Attack: A learned risk gate is enough.
+## Attack: The old v4 result is hidden.
 
-Response: The strongest non-oracle baseline is `ensemble_risk_gate` at `0.598 +/- 0.008`. The proposed arbiter reaches `0.698 +/- 0.008`, a paired `0.100 +/- 0.007` gain with `7/7` seed wins.
+Response: The retained v4 method `proposed_servo_foundation_arbiter_v4` is the strongest non-oracle comparator and is beaten directly: hard success `0.79741` vs `0.73322`, hard utility `0.92520` vs `0.79004`.
 
-## Reviewer Attack: The switch components may be decorative.
+## Attack: The method wins by being unsafe.
 
-Response: Ablations reject that. The full method reaches `0.703 +/- 0.007`; the best removed-component variant reaches `0.666 +/- 0.008`.
+Response: Unsafe-action rate decreases by `0.03636`, tracking error by `0.01964`, damage by `0.01331`, latency by `0.02029`, and calibration error by `0.01735`.
 
-## Reviewer Attack: The paper is not ready for ICLR main.
+## Attack: Fixed-risk deployment is cosmetic.
 
-Response: Agreed. The honest decision is `STRONG_REVISE`, not ready. The v4.1 evidence has 5,880 detailed stress rows and 8 failure cases, but it still needs real robot or external high-fidelity validation and released controller artifacts.
+Response: The strict budget `0.10` has non-trivial coverage `0.94313`, zero breach, and positive utility margin `0.32190`.
+
+## Attack: This is still not a real robotics submission.
+
+Response: Agreed. The terminal state is STRONG_REVISE, not ready. The scope gate fails without real robot or accepted high-fidelity validation and release artifacts.
